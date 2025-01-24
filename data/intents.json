@@ -1,0 +1,15 @@
+{
+    "intents": [
+      {
+        "intent": "greeting",
+        "patterns": ["Oi", "Olá", "Bom dia"],
+        "responses": ["Olá, como posso ajudar?", "Oi! Como você está?"]
+      },
+      {
+        "intent": "goodbye",
+        "patterns": ["Tchau", "Adeus", "Até logo"],
+        "responses": ["Até logo!", "Tchau, até mais!", "Nos vemos em breve!"]
+      }
+    ]
+  }
+  
