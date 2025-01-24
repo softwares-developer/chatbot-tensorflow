@@ -1,9 +1,9 @@
-import pickle
-import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+import pickle
 import nltk
 import json
+import numpy as np
 
 # Baixar o punkt para tokenização
 nltk.download('punkt')
@@ -24,14 +24,22 @@ def get_response(text):
     # Tokenizar e padronizar a entrada
     sequence = tokenizer.texts_to_sequences([text])
 
-    # Ajustar maxlen para 2 (tamanho das sequências usadas no treinamento)
-    maxlen = 2  # Ajuste conforme o valor usado durante o treinamento
+    # Use o mesmo maxlen que foi utilizado durante o treinamento (por exemplo, 5)
+    maxlen = 5  # Ajuste de acordo com o valor usado no treinamento
+
+    # Padronize a sequência
     padded = pad_sequences(sequence, padding='post', maxlen=maxlen)
 
     # Prever a classe (intenção)
     prediction = model.predict(padded)
     intent_index = np.argmax(prediction)
-    intent = label_encoder.inverse_transform([intent_index])[0]
+
+    try:
+        # Verifica se a intenção prevista está no LabelEncoder
+        intent = label_encoder.inverse_transform([intent_index])[0]
+    except ValueError:
+        # Se o índice não for reconhecido, retorna uma mensagem de erro
+        intent = "Desculpe, não entendi."
 
     # Respostas baseadas na intenção
     with open('data/intents.json') as file:

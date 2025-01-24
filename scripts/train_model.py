@@ -1,19 +1,46 @@
+from sklearn.preprocessing import LabelEncoder
 import numpy as np
+import json
+import pickle
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-from sklearn.preprocessing import LabelEncoder
+from tensorflow.keras.preprocessing.text import Tokenizer
 
-# Carregar e preparar os dados
-# Certifique-se de que você tenha pré-processado os dados antes (tokenizer, padded_sequences, labels_encoded)
-# Isso inclui a tokenização e o padding das sequências, além da codificação das labels.
+# Carregar os dados do intents.json
+with open('data/intents.json') as file:
+    data = json.load(file)
 
-# Exemplo de dados fictícios de entrada (substitua por seus dados reais):
-padded_sequences = np.load('model/padded_sequences.npy')  # Exemplo de dados pré-processados
-labels_encoded = np.load('model/labels_encoded.npy')  # Exemplo de labels codificados
+patterns = []
+responses = []
+labels = []
 
-# Definir o modelo
+# Preparar os dados de entrada
+for intent in data['intents']:
+    for pattern in intent['patterns']:
+        patterns.append(pattern)
+        responses.append(intent['responses'])
+        labels.append(intent['intent'])
+
+# Tokenização e Padding
+tokenizer = Tokenizer()
+tokenizer.fit_on_texts(patterns)
+sequences = tokenizer.texts_to_sequences(patterns)
+padded_sequences = pad_sequences(sequences, padding='post', maxlen=5)
+
+# Codificar as labels
+label_encoder = LabelEncoder()
+labels_encoded = label_encoder.fit_transform(labels)
+
+# Salvar o tokenizer e o label_encoder
+with open('model/tokenizer.pkl', 'wb') as handle:
+    pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+with open('model/label_encoder.pkl', 'wb') as handle:
+    pickle.dump(label_encoder, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+# Criar e treinar o modelo
 model = Sequential([
     Dense(128, input_dim=padded_sequences.shape[1], activation='relu'),
     Dropout(0.5),
@@ -24,11 +51,7 @@ model = Sequential([
     Dense(len(np.unique(labels_encoded)), activation='softmax')  # Número de classes de saída
 ])
 
-# Compilar o modelo
-model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-
-# Resumo do modelo para visualizar a arquitetura
-model.summary()
+model.compile(optimizer=Adam(), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 # Treinar o modelo
 model.fit(padded_sequences, labels_encoded, epochs=100, batch_size=8)

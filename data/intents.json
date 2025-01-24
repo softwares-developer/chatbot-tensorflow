@@ -1,15 +1,99 @@
 {
-    "intents": [
-      {
-        "intent": "greeting",
-        "patterns": ["Oi", "Olá", "Bom dia"],
-        "responses": ["Olá, como posso ajudar?", "Oi! Como você está?"]
-      },
-      {
-        "intent": "goodbye",
-        "patterns": ["Tchau", "Adeus", "Até logo"],
-        "responses": ["Até logo!", "Tchau, até mais!", "Nos vemos em breve!"]
-      }
-    ]
-  }
-  
+  "intents": [
+    {
+      "intent": "greeting",
+      "patterns": [
+        "Oi", "Olá", "Bom dia", "Oi, como vai?", "E aí?", "Como você está?", "Oi, tudo bem?",
+        "Oi, como você está?", "Oi, tudo certo?", "Olá, tudo bem?", "Oi, beleza?"
+      ],
+      "responses": [
+        "Olá, como posso ajudar?",
+        "Oi! Como você está?",
+        "Oi, tudo bem com você?",
+        "Oi! O que posso fazer por você?",
+        "Olá, tudo ótimo por aqui, e você?",
+        "Oi! Como posso te ajudar hoje?",
+        "Oi, tudo certo! Como posso te ajudar?"
+      ]
+    },
+    {
+      "intent": "goodbye",
+      "patterns": [
+        "Tchau", "Adeus", "Até logo", "Até mais", "Nos vemos", "Falou", "Até breve"
+      ],
+      "responses": [
+        "Até logo!",
+        "Tchau, até mais!",
+        "Nos vemos em breve!",
+        "Até logo, tenha um ótimo dia!",
+        "Tchau, foi bom conversar com você!",
+        "Até mais! Volte sempre!",
+        "Até logo! Espero te ver novamente!"
+      ]
+    },
+    {
+      "intent": "thanks",
+      "patterns": [
+        "Obrigado", "Muito obrigado", "Agradeço", "Valeu", "Obrigadão", "Obrigado mesmo", "Te agradeço"
+      ],
+      "responses": [
+        "De nada! Estou sempre à disposição.",
+        "Que bom que pude ajudar!",
+        "Você é bem-vindo! Se precisar de algo, estou por aqui.",
+        "Fico feliz em ajudar, conte comigo!",
+        "Não há de quê! Estou à disposição.",
+        "Sempre que precisar, é só chamar!"
+      ]
+    },
+    {
+      "intent": "sorry",
+      "patterns": [
+        "Desculpa", "Me perdoe", "Foi mal", "Desculpe mesmo", "Sinto muito", "Peço desculpas"
+      ],
+      "responses": [
+        "Não tem problema, estamos aqui para conversar!",
+        "Não se preocupe, tudo bem!",
+        "Sem problemas, pode falar!",
+        "Tudo bem! Vamos seguir em frente.",
+        "Não precisa pedir desculpas, tudo certo!"
+      ]
+    },
+    {
+      "intent": "how_are_you",
+      "patterns": [
+        "Como você está?", "Como vai?", "Tudo bem?", "Como você está se sentindo?", "Como está o dia?"
+      ],
+      "responses": [
+        "Estou bem, obrigado! E você?",
+        "Tudo certo, e você?",
+        "Estou ótimo, e você? Como posso te ajudar?",
+        "Tudo bem por aqui, como posso ajudar você?",
+        "Estou bem, obrigado por perguntar! E você, como está?"
+      ]
+    },
+    {
+      "intent": "affirmative",
+      "patterns": [
+        "Sim", "Claro", "Com certeza", "Certamente", "Isso mesmo", "Exato", "Pode deixar"
+      ],
+      "responses": [
+        "Ótimo! Vamos lá!",
+        "Que bom! Vamos em frente.",
+        "Certo! Conte comigo.",
+        "Perfeito! Como posso ajudar mais?"
+      ]
+    },
+    {
+      "intent": "negative",
+      "patterns": [
+        "Não", "Não sei", "Nada disso", "De jeito nenhum", "Não quero", "Não é isso"
+      ],
+      "responses": [
+        "Tudo bem, sem problemas!",
+        "Entendido! Se mudar de ideia, estarei aqui.",
+        "Sem problemas, se precisar, é só avisar.",
+        "Ok, sem pressa. Quando estiver pronto, podemos continuar."
+      ]
+    }
+  ]
+}
